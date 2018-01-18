@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <footer id="copyright">
+    <footer id="copyright" v-if="showFooter">
       <p>Copyright © {{curYear}} www.lglzy.cc All Rights Reserved</p>
     </footer>
   </div>
@@ -25,6 +25,7 @@ export default {
       myParticleground: null,
       titleEnter: false,
       enterTimer: null,
+      showFooter: false,
       homeLinks: [
         {
           title: 'Blog',
@@ -59,10 +60,6 @@ export default {
     let vm = this
     /* global Particleground:true */
     /* eslint no-undef: "error" */
-    vm.myParticleground = new Particleground(document.getElementById('particles'), {
-      dotColor: 'rgba(25,144,255,0.3)',
-      lineColor: 'rgba(25,144,255,0.3)'
-    })
     vm.enterTimer = setTimeout(() => {
       vm.titleEnter = true
       vm.loadLLinks(500)
@@ -85,6 +82,10 @@ export default {
       let counter = 0
       let target = vm.homeLinks
       clearTimeout(vm.enterTimer)
+      vm.myParticleground = new Particleground(document.getElementById('particles'), {
+        dotColor: 'rgba(25,144,255,0.3)',
+        lineColor: 'rgba(25,144,255,0.3)'
+      })
       addItem()
       function addItem () {
         let timer = setTimeout(() => {
@@ -95,6 +96,7 @@ export default {
           } else {
             clearTimeout(timer)
             counter = 0
+            vm.showFooter = true
           }
         }, interval)
       }
@@ -167,6 +169,7 @@ export default {
   position: absolute;
   bottom: 0;
   width: 100%;
+  animation: .8s fadeIn ease-in-out;
   p {
     color: #aaa;
     font-size: 10px;
