@@ -1,0 +1,243 @@
+<template>
+  <div>
+    <div id="particles"></div>
+    <div id="intro">
+      <div class="intro-container">
+        <h1>HI this is Roy</h1>
+        <div :class="titleEnter?'enter links-container':'links-container'">
+          <p v-for="(item, index) in homeLinks" :key="index" v-show="item.show">
+            <a @click="alertMessage(item.link)" :href="item.link?item.link : '#'">{{item.title}}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <footer id="copyright">
+      <p>Copyright © {{curYear}} www.lglzy.cc All Rights Reserved</p>
+    </footer>
+  </div>
+</template>
+<script>
+require('../assets/js/jquery.particleground.js')
+export default {
+  name: 'Home',
+  data () {
+    return {
+      myParticleground: null,
+      titleEnter: false,
+      enterTimer: null,
+      homeLinks: [
+        {
+          title: 'Blog',
+          link: '',
+          show: false
+        },
+        {
+          title: 'GitHub',
+          link: 'https://github.com/luogao',
+          show: false
+        },
+        {
+          title: 'Work',
+          link: '',
+          show: false
+        },
+        {
+          title: 'About Me',
+          link: '',
+          show: false
+        }
+      ]
+    }
+  },
+  computed: {
+    curYear () {
+      let date = new Date()
+      return date.getFullYear()
+    }
+  },
+  mounted () {
+    let vm = this
+    /* global Particleground:true */
+    /* eslint no-undef: "error" */
+    vm.myParticleground = new Particleground(document.getElementById('particles'), {
+      dotColor: 'rgba(25,144,255,0.3)',
+      lineColor: 'rgba(25,144,255,0.3)'
+    })
+    vm.enterTimer = setTimeout(() => {
+      vm.titleEnter = true
+      vm.loadLLinks(500)
+    }, 2000)
+  },
+  beforeDestroy () {
+    this.myParticleground.destroy()
+  },
+  methods: {
+    alertMessage (link) {
+      if (link) {
+        return true
+      } else {
+        alert('抱歉,服务器迁移中......')
+        return false
+      }
+    },
+    loadLLinks (interval) {
+      let vm = this
+      let counter = 0
+      let target = vm.homeLinks
+      clearTimeout(vm.enterTimer)
+      addItem()
+      function addItem () {
+        let timer = setTimeout(() => {
+          target[counter].show = true
+          counter++
+          if (counter !== target.length) {
+            addItem()
+          } else {
+            clearTimeout(timer)
+            counter = 0
+          }
+        }, interval)
+      }
+    }
+  }
+}
+</script>
+
+<style lang="Sass">
+#intro {
+  position: fixed;
+  text-align: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  h1 {
+    text-transform: uppercase;
+    font-size: 75px;
+    font-weight: 700;
+    letter-spacing: 0.015em;
+    color: #5a6067;
+    margin: 0;
+    margin-bottom: 60px;
+    transition: all .3s;
+    animation: 2s fadeIn ease-in-out;
+  }
+  .links-container{
+    min-height: 0;
+    transition: .5s ease-in-out;
+    overflow: hidden;
+    &.enter{
+      min-height: 435px;
+    }
+    p {
+      width: 80%;
+      max-width: 450px;
+      margin: 0 auto 35px auto;
+      transition: all 0.2s;
+      animation: .5s fadeInUp;
+      &:last-child {
+        margin-bottom: 0px;
+      }
+      a {
+        text-decoration: none;
+        display: block;
+        color: #fff;
+        background: rgba(25, 144, 255, 0.7);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 70px;
+        font-size: 20px;
+        line-height: 70px;
+        font-weight: 500;
+        &:hover {
+          background: none;
+          box-shadow: 0 0 0;
+          color: #5eb1ff;
+          transition: all 0.2s;
+        }
+      }
+    }
+  }
+}
+#copyright {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  p {
+    color: #aaa;
+    font-size: 10px;
+    text-align: center;
+    margin: 0 0 40px 0;
+  }
+}
+#particles{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+@media only screen and (max-width: 1000px) {
+  #intro{
+    h1 {
+      font-size: 70px;
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  #intro{
+    h1 {
+      font-size: 48px;
+    }
+  }
+}
+@media only screen and (max-width: 568px) {
+  #intro {
+    padding: 0 10px;
+    h1 {
+      font-size: 30px;
+    }
+  }
+}
+@media only screen and (max-width: 320px) {
+  #intro {
+    h1 {
+      font-size: 28px;
+    }
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+</style>
