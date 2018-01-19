@@ -6,7 +6,8 @@
         <h1>HI this is Roy</h1>
         <div :class="titleEnter?'enter links-container':'links-container'">
           <p v-for="(item, index) in homeLinks" :key="index" v-if="item.show">
-            <a @click="alertMessage(item.link)" :href="item.link?item.link : '#'">{{item.title}}</a>
+            <a :href="item.link?item.link : '#'" v-if="item.normal">{{item.title}}</a>
+            <router-link v-else :to="item.link">{{item.title}}</router-link>
           </p>
         </div>
       </div>
@@ -29,23 +30,27 @@ export default {
       homeLinks: [
         {
           title: 'Blog',
-          link: '',
-          show: false
+          link: 'under_construction',
+          show: false,
+          normal: false
         },
         {
           title: 'GitHub',
           link: 'https://github.com/luogao',
-          show: false
+          show: false,
+          normal: true
         },
         {
           title: 'Work',
-          link: '',
-          show: false
+          link: 'under_construction',
+          show: false,
+          normal: false
         },
         {
           title: 'About Me',
-          link: '',
-          show: false
+          link: 'under_construction',
+          show: false,
+          normal: false
         }
       ]
     }
@@ -69,14 +74,6 @@ export default {
     this.myParticleground.destroy()
   },
   methods: {
-    alertMessage (link) {
-      if (link) {
-        return true
-      } else {
-        alert('抱歉,服务器迁移中......')
-        return false
-      }
-    },
     loadLLinks (interval) {
       let vm = this
       let counter = 0
