@@ -5,7 +5,7 @@
       <div class="intro-container">
         <h1>HI this is Roy</h1>
         <div :class="titleEnter?'enter links-container':'links-container'">
-          <p v-for="(item, index) in homeLinks" :key="index" v-show="item.show">
+          <p v-for="(item, index) in homeLinks" :key="index" v-if="item.show">
             <a @click="alertMessage(item.link)" :href="item.link?item.link : '#'">{{item.title}}</a>
           </p>
         </div>
