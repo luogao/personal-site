@@ -346,7 +346,7 @@
     }
 
     function destroy() {
-      console.log('destroy');
+      // console.log('destroy');
       canvas.parentNode.removeChild(canvas);
       hook('onDestroy');
       if ($) {

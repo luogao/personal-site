@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="particles"></div>
+    <div id="under_construction_particles"></div>
     <div class="alert-word"><span id="dynamicTxt">{{message}}</span></div>
     <footer id="copyright">
       <p>Copyright © {{curYear}} www.lglzy.cc All Rights Reserved</p>
@@ -25,19 +25,25 @@ export default {
     }
   },
   mounted () {
-    let vm = this
     /* global Particleground:true */
     /* eslint no-undef: "error" */
-    vm.myParticleground = new Particleground(document.getElementById('particles'), {
+    this.myParticleground = this.createParticleground('under_construction_particles', {
       dotColor: 'rgba(136,136,136,0.3)',
       lineColor: 'rgba(136,136,136,0.3)'
     })
     // dynamicTxtFn(vm.message, 100)
   },
   beforeDestroy () {
-    this.myParticleground.destroy()
+    if (this.myParticleground) {
+      this.myParticleground.destroy()
+      this.myParticleground = null
+    }
   },
-  methods: { }
+  methods: {
+    createParticleground (element, option) {
+      return new Particleground(document.getElementById(element), option)
+    }
+  }
 }
 </script>
 
@@ -61,7 +67,7 @@ export default {
         text-align:center;
     }
 }
-#particles{
+#under_construction_particles{
   position: fixed;
   width: 100%;
   height: 100%;

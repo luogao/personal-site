@@ -71,15 +71,21 @@ export default {
     }, 2000)
   },
   beforeDestroy () {
-    this.myParticleground.destroy()
+    if (this.myParticleground) {
+      this.myParticleground.destroy()
+      this.myParticleground = null
+    }
   },
   methods: {
+    createParticleground (element, option) {
+      return new Particleground(document.getElementById(element), option)
+    },
     loadLLinks (interval) {
       let vm = this
       let counter = 0
       let target = vm.homeLinks
       clearTimeout(vm.enterTimer)
-      vm.myParticleground = new Particleground(document.getElementById('particles'), {
+      vm.myParticleground = vm.createParticleground('particles', {
         dotColor: 'rgba(25,144,255,0.3)',
         lineColor: 'rgba(25,144,255,0.3)'
       })
