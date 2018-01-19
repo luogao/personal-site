@@ -1,10 +1,9 @@
-const dynamicTxtFn = function() {
+/* eslint-disable */
+const dynamicTxtFn = function(text,interval) {
     return new Promise((resolve, reject) => {
-        let timeout = 40
-        let element = document.getElementById('dynamicTxt').getElementsByClassName('txt')[0];
-        let fullString = `新年快乐！  
-        <br/>
-        `
+        let timeout = interval
+        let element = document.getElementById('dynamicTxt');
+        let fullString = text
         let showString = '';
         let showTxtFn = () => {
             if (showString.length < fullString.length) {

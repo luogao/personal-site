@@ -1,13 +1,14 @@
 <template>
   <div>
     <div id="particles"></div>
-    <div class="alert-word"><span>{{message}}</span></div>
-    <footer id="copyright" v-if="showFooter">
+    <div class="alert-word"><span id="dynamicTxt">{{message}}</span></div>
+    <footer id="copyright">
       <p>Copyright © {{curYear}} www.lglzy.cc All Rights Reserved</p>
     </footer>
   </div>
 </template>
 <script>
+// import dynamicTxtFn from '../assets/js/dynamicTxt'
 export default {
   name: 'UnderConstruction',
   data () {
@@ -17,7 +18,12 @@ export default {
       message: '抱歉，页面正在建造中'
     }
   },
-  computed: {},
+  computed: {
+    curYear () {
+      let date = new Date()
+      return date.getFullYear()
+    }
+  },
   mounted () {
     let vm = this
     /* global Particleground:true */
@@ -26,6 +32,7 @@ export default {
       dotColor: 'rgba(136,136,136,0.3)',
       lineColor: 'rgba(136,136,136,0.3)'
     })
+    // dynamicTxtFn(vm.message, 100)
   },
   beforeDestroy () {
     this.myParticleground.destroy()
@@ -47,8 +54,8 @@ export default {
     font-weight: 700;
     letter-spacing: 0.015em;
     color: #5a6067;
-    animation: 2s fadeIn ease-in-out;
     align-items: center;
+    animation: 2s fadeIn ease-in;
     justify-content: center;
     span{
         text-align:center;
@@ -60,6 +67,17 @@ export default {
   height: 100%;
   top: 0;
   left: 0;
+}
+#copyright {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  p {
+    color: #aaa;
+    font-size: 10px;
+    text-align: center;
+    margin: 0 0 40px 0;
+  }
 }
 @keyframes fadeInUp {
   from {
