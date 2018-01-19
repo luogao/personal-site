@@ -1,10 +1,10 @@
 <template>
   <div>
     <div id="particles"></div>
-    <div id="intro">
+    <div id="intro" :class="titleEnter?'enter':''">
       <div class="intro-container">
-        <h1>HI this is Roy</h1>
-        <div :class="titleEnter?'enter links-container':'links-container'">
+        <h1 id="dynamicTxt"></h1>
+        <div class='links-container'>
           <p v-for="(item, index) in homeLinks" :key="index" v-if="item.show">
             <a :href="item.link?item.link : '#'" v-if="item.normal">{{item.title}}</a>
             <router-link v-else :to="item.link">{{item.title}}</router-link>
@@ -18,12 +18,14 @@
   </div>
 </template>
 <script>
+import dynamicTxtFn from '../assets/js/dynamicTxt'
 require('../assets/js/jquery.particleground.js')
 export default {
   name: 'Home',
   data () {
     return {
       myParticleground: null,
+      message: 'HI this is Roy',
       titleEnter: false,
       enterTimer: null,
       showFooter: false,
@@ -69,6 +71,7 @@ export default {
       vm.titleEnter = true
       vm.loadLLinks(500)
     }, 2000)
+    dynamicTxtFn(vm.message, 120)
   },
   beforeDestroy () {
     if (this.myParticleground) {
@@ -121,24 +124,32 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background: rgba(25, 144, 255, 0.7);
+  transition: all .3s ease-out;
+  &.enter{
+    background: none;
+    .links-container{
+      min-height:435px;
+    }
+    h1{
+      color: #5a6067;
+    }
+  }
   h1 {
     text-transform: uppercase;
     font-size: 75px;
     font-weight: 700;
     letter-spacing: 0.015em;
-    color: #5a6067;
+    color: #fff;
     margin: 0;
     margin-bottom: 60px;
     transition: all .3s;
-    animation: 2s fadeIn ease-in-out;
+    /* animation: 2s fadeIn ease-in-out; */
   }
   .links-container{
     min-height: 0;
     transition: .5s ease-in-out;
     overflow: hidden;
-    &.enter{
-      min-height: 435px;
-    }
     p {
       width: 80%;
       max-width: 450px;

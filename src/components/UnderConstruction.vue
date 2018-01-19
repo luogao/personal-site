@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="under_construction_particles"></div>
-    <div class="alert-word"><span id="dynamicTxt">{{message}}</span></div>
+    <div class="alert-word"><span>{{message}}</span></div>
     <footer id="copyright">
       <p>Copyright © {{curYear}} www.lglzy.cc All Rights Reserved</p>
     </footer>

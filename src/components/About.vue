@@ -31,7 +31,6 @@ export default {
     let vm = this
     /* global Particleground:true */
     /* eslint no-undef: "error" */
-    
   },
   beforeDestroy () {
   },
