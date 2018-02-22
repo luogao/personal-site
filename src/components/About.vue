@@ -11,9 +11,6 @@
         </div>
       </div>
     </div>
-    <footer id="copyright" v-if="showFooter">
-      <p>Copyright © {{curYear}} www.lglzy.cc All Rights Reserved</p>
-    </footer>
   </div>
 </template>
 <script>
