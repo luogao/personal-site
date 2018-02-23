@@ -44,7 +44,7 @@ export default {
         },
         {
           title: 'Work',
-          link: 'work',
+          link: 'under_construction',
           show: false,
           normal: false
         },
