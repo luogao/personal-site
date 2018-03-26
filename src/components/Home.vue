@@ -150,6 +150,7 @@ export default {
     min-height: 0;
     transition: .5s ease-in-out;
     overflow: hidden;
+        padding: 5px 0;
     p {
       width: 80%;
       max-width: 450px;
