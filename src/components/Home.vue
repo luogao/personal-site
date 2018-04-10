@@ -32,7 +32,7 @@ export default {
       homeLinks: [
         {
           title: 'Blog',
-          link: 'under_construction',
+          link: 'https://www.lglzy.cn/blog/',
           show: false,
           normal: false
         },
