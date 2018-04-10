@@ -13,7 +13,7 @@
       </div>
     </div>
     <footer id="copyright" v-if="showFooter">
-      <p>Copyright © {{curYear}} www.lglzy.cc All Rights Reserved</p>
+      <p>Copyright © {{curYear}} <a href="https://www.lglzy.cn/">www.lglzy.cn</a> All Rights Reserved</p>
     </footer>
   </div>
 </template>
@@ -190,6 +190,7 @@ export default {
     font-size: 10px;
     text-align: center;
     margin: 0 0 40px 0;
+    a{color: #aaa;text-decoration:none;}
   }
 }
 #particles{
