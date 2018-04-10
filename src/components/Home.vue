@@ -34,7 +34,7 @@ export default {
           title: 'Blog',
           link: 'https://www.lglzy.cn/blog/',
           show: false,
-          normal: false
+          normal: true
         },
         {
           title: 'GitHub',
